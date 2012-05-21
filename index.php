@@ -123,15 +123,15 @@ img.php?name={{short_name}}{{/img_src}}" width="200" height="200" alt="Picture o
       </div>
 
       <div class="box_info">
-      <p class="details">
-        <label>Type:</label> <span>{{type}}</span><br>
-        <label>Rarity:</label> <span>{{rarity}}</span><br>
-        <label>Source:</label> <span>{{source}}</span><br>
-      </p>
-      <p class="info">{{{info}}}</p>
-    {{#flavour_text}}
-      <p class="flavour_text">{{flavour_text}}</p>
-    {{/flavour_text}}
+        <p class="details">
+          <label>Type:</label> <span>{{type}}</span><br>
+          <label>Rarity:</label> <span>{{rarity}}</span><br>
+          <label>Source:</label> <span>{{source}}</span><br>
+        </p>
+        <p class="info">{{{info}}}</p>
+      {{#flavour_text}}
+        <p class="flavour_text">{{flavour_text}}</p>
+      {{/flavour_text}}
       </div>
       <a class="button" id="close_popup" href="#">back to pet list</a>
     </script>
