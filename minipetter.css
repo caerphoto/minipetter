@@ -1,0 +1,747 @@
+html {
+    background-color: #fff;
+    margin: 0;
+    padding: 0;
+}
+
+body {
+    max-width: 900px;
+    margin: 1em auto;
+    padding: 0;
+    font-family: "Nobile", "Tahoma", sans-serif;
+    font-size: 14px;
+    line-height: 1.6;
+}
+
+h1 {
+    font-size: 2em;
+    text-align: center;
+}
+
+h2 {
+    font-size: 1.5em;
+}
+
+#page_title {
+    width: 586px;
+    height: 250px;
+    margin: 1em auto 0 auto;
+    background-image: url('logo.png');
+    text-indent: -999em;
+    padding: 0;
+}
+
+#authors {
+    font-size: 0.9em;
+    color: rgba(0,0,0,0.4);
+
+    position: absolute;
+    bottom: 0.5em;
+    left: 1em;
+    cursor: default;
+    z-index: 3;
+    -webkit-transition: color 0.4s ease-in-out;
+}
+
+#authors:hover {
+    color: rgba(0,0,0,1.0);
+    -webkit-transition: color 0.4s ease-in-out;
+}
+
+p {
+    margin: 0;
+}
+
+input, button, textarea {
+    font: inherit;
+}
+
+input {
+    padding: 0.3em 0.5em;
+    line-height: 1;
+}
+
+textarea {
+    overflow: auto;
+}
+
+input, .textarea_wrapper {
+    border: 1px solid #aaa;
+    box-shadow: 2px 2px 2px -2px rgba(0,0,0,0.4) inset;
+}
+
+input:focus, .textarea_wrapper.focus {
+    outline: none;
+    border-color: #58a;
+    box-shadow:
+        2px 2px 2px -2px rgba(0,0,0,0.4) inset,
+        0 0 2px 2px #ace;
+}
+
+input:invalid {
+    background-color: #ff0;
+}
+
+button, a.button {
+    display: inline-block;
+    margin: 0;
+    padding: 0.3em 0.7em 0.1em;
+    border: none;
+    box-shadow:
+        0 0 0 1px rgba(0,0,0,0.3) inset,
+        0 -1.5em 2em -1em rgba(0,0,0,0.1) inset;
+
+    cursor: pointer;
+
+    color: #333;
+    background-color: #eee;
+    text-shadow: 0 1px 0 rgba(255,255,255,0.3);
+    text-decoration: none;
+    text-align: center;
+}
+
+button:hover, a.button:hover {
+    background-color: #fff;
+}
+
+button:active, a.button:active {
+    box-shadow: 0 0 0 2px rgba(0,0,0,0.3) inset;
+}
+
+input[type='search'] {
+    width: 12em;
+}
+
+.clear_float {
+    clear: both;
+    float: none;
+}
+
+#login_panel {
+    position: absolute;
+    top: 1em;
+    right: 1em;
+    font-size: 0.7em;
+}
+
+.button.log_out {
+    display: none;
+    background-color: #ee8;
+}
+
+.button.log_out:hover {
+    background-color: #ffa;
+}
+
+body.logged_in label[for='password'], body.logged_in a[href='#log_in'] {
+    opacity: 0.0;
+    display: none;
+    -webkit-transition: all 0.5s ease-in-out;
+    -moz-transition: all 0.5s ease-in-out;
+    -ms-transition: all 0.5s ease-in-out;
+    transition: all 0.5s ease-in-out;
+}
+
+body.logged_in a[href='#log_out'] {
+    display: block;
+}
+
+#list_controls {
+    visibility: hidden;
+    overflow: visible;
+    position: relative;
+    padding-top: 0.5em;
+}
+
+#list_controls.visible {
+    visibility: visible;
+}
+
+#list_controls label {
+    display: inline-block;
+    margin-right: 1em;
+}
+
+label.search::before {
+    content: "Search pets: ";
+}
+
+#reset_filters {
+    float: right;
+}
+
+a[href='#add'] {
+    display: none;
+    position: absolute;
+    top: -3em;
+    right: 0;
+    background-color: #cfa;
+}
+
+a[href='#add']:hover {
+    background-color: #dfc;
+}
+
+body.logged_in a[href='#add'] {
+    display: block;
+}
+
+#main_wrapper {
+    position: absolute;
+    width: 100%;
+    max-width: 900px;
+    top: 24em;
+    bottom: 0;
+}
+
+#close_popup {
+    display: none;
+}
+
+#list_hint {
+    padding-left: 50px;
+}
+
+#pet_list {
+    position: absolute;
+    right: 0;
+    top: 0;
+    bottom: 1em;
+    display: none;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    list-style: none;
+    width: 300px;
+    padding: 0;
+    margin: 0;
+    z-index: 2;
+
+    overflow: auto;
+    padding-left: 0.5em;
+}
+
+#pet_list.visible {
+    display: block;
+}
+
+#pet_list li {
+    margin: 0;
+    padding: 0 0.5em 0 0;
+    position: relative;
+    overflow: visible;
+    /*border-left: 4px solid #ccc;*/
+}
+
+.pet_link {
+    display: block;
+
+    /*border-top: 1px solid #ccc;*/
+    padding: 0.5em 1em 0.5em 2em;
+
+    border: 1px solid #ddd;
+
+    background: #fff;
+    margin-bottom: 0.5em;
+
+    color: #555;
+    text-decoration: none;
+}
+
+#pet_list li.target a.pet_link {
+    background-color: #def;
+    color: #000;
+    /*box-shadow: 0 1px 3px rgba(64, 192, 255, 0.2);*/
+    border-color: #ace;
+}
+
+#pet_list li:hover a.pet_link {
+    background-color: #ddd;
+    color: #000;
+    /*box-shadow: 0 1px 3px rgba(0,0,0, 0.2);*/
+    border-color: #aaa;
+}
+
+.poor {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1),
+        6px 0 0 -3px #9d9d9d inset;
+}
+.common {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1),
+        6px 0 0 -3px #000 inset;
+}
+.uncommon {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1),
+        6px 0 0 -3px #1ecc00 inset;
+}
+.rare {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1),
+        6px 0 0 -3px #0070dd inset;
+}
+.epic {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1),
+        6px 0 0 -3px #a335ee inset;
+}
+.legendary {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1),
+        6px 0 0 -3px #ff8000 inset;
+}
+.heirloom {
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1),
+        6px 0 0 -3px #e6cc80 inset;
+}
+
+#pet_list .button.delete {
+    display: none;
+    position: absolute;
+    right: 1em;
+    top: 0.7em;
+    height: 1.4em;
+    width: 1.4em;
+    font-size: 14px;
+    padding: 0;
+    line-height: 1.4em;
+}
+
+#pet_list .button.delete:hover {
+    background-color: #f88;
+    color: #fff;
+}
+
+body.logged_in #pet_list .button.delete {
+    display: block;
+}
+
+#popup_box, #editor {
+    position: absolute;
+    display: none;
+
+    border: 1px solid #ddd;
+    -moz-box-sizing: border-box;
+    box-sizing: border-box;
+
+    color: #333;
+    z-index: 1;
+    overflow: hidden;
+}
+
+#popup_box {
+    left: 0;
+    top: 0;
+
+    width: 600px;
+    background-color: #fff;
+    box-shadow: 0 1px 3px rgba(0,0,0,0.1);
+}
+
+#popup_box.visible, #editor.visible {
+    display: block;
+}
+
+#popup_box.visible:before {
+    content: "";
+}
+
+.box_buttons {
+    display: none;
+
+    position: absolute;
+    top: 1em;
+    right: 1em;
+}
+
+body.logged_in .box_buttons {
+    display: block;
+}
+
+.button.change {
+    background-color: #ace;
+}
+
+.button.change:hover {
+    background-color: #cdf;
+}
+
+#popup_box h2 {
+    margin: 0;
+    padding: 0.5em 0;
+    border-bottom: 1px dotted #ccc;
+    text-align: center;
+}
+
+.box_left {
+    float: left;
+    width: 200px;
+    overflow: hidden;
+    border-right: 1px dotted #ccc;
+    padding: 10px;
+
+    /*-moz-box-sizing: border-box;*/
+    /*box-sizing: border-box;*/
+}
+
+.box_img {
+    display: block;
+    margin: 0 auto;
+    /*height: 150px;*/
+}
+
+.box_coords {
+    font-family: monospace;
+    text-align: center;
+    margin-bottom: 10px;
+}
+
+.box_loc {
+    padding: 0 1em;
+    text-align: center;
+}
+
+.box_info {
+    width: auto;
+    margin-left: 221px;
+}
+
+.box_info .details {
+    background-color: #f5f5f5;
+    padding: 0.5em 1em;
+}
+
+.details label {
+    display: inline-block;
+    width: 4em;
+}
+
+.details span {
+    font-weight: bold;
+}
+
+.box_info p + p {
+    padding: 1em;
+    white-space: pre-line;
+}
+
+#editor {
+    top: -4em;
+    background-color: #f5f8ff;
+    border-color: #ace;
+    width: 800px;
+    left: 50px;
+    box-shadow: 0 1px 3px rgba(48, 64, 80, 0.1);
+}
+
+#editor.is_new_pet {
+    background-color: #f8fdf5;
+    border-color: #bd9;
+    box-shadow: 0 1px 3px rgba(64, 128, 0, 0.1);
+}
+
+#editor_form {
+    margin: 1em;
+}
+
+#editor_form .field {
+    margin-bottom: 1em;
+    clear: left;
+}
+
+#editor_form .field.column {
+    float: left;
+    clear: none;
+    overflow: hidden;
+    margin-right: 3em;
+}
+
+
+#editor label {
+    display: block;
+    width: 6.5em;
+    margin-right: 0.5em;
+}
+
+#editor input {
+    display: inline-block;
+    width: 20em;
+}
+
+#editor input[name='img_src'] {
+    width: 30em;
+}
+
+#editor input[name='x'], #editor input[name='y'] {
+    width: 4em;
+}
+
+#editor .column label {
+    display: inline-block;
+    width: auto;
+}
+
+#derived_short_name {
+    /*display: none;*/
+    opacity: 0.7;
+    margin-left: 1em;
+}
+
+#sn {
+    font-family: "Consolas", monospace;
+    padding: 0 0.5em;
+}
+
+#sn.already_exists {
+    color: #f00;
+}
+
+#editor_form label[for='info'] {
+    clear: both;
+}
+
+#editor label[for='info'] + div {
+    padding: 0.5em;
+    background: #fff;
+}
+
+#editor textarea {
+    display: block;
+    padding: 0;
+    margin: 0;
+    border: none;
+    width: 100%;
+    height: 10em;
+    resize: none;
+    outline: none;
+}
+
+/* Common styles for touch-based devices, i.e. tablets and phones. */
+@media screen and (max-width: 916px) {
+    #login_panel, #list_hint, #editor {
+        display: none;
+    }
+
+    body {
+        margin: 0;
+        /* not very smooth but it's better than a change in size */
+        -webkit-transition: font-size 0.2s ease-in-out;
+        transition: font-size 0.2s ease-in-out;
+    }
+
+    #list_controls {
+        padding-left: 0.5em;
+        padding-right: 0.5em;
+    }
+
+    #pet_list {
+        padding-right: 0.5em;
+    }
+
+    #pet_list a.pet_link {
+        -webkit-tap-highlight-color: #ace;
+    }
+
+    #pet_list li:hover a.pet_link {
+        background: #fff;
+        color: #555;
+        border-color: #ddd;
+        /*box-shadow: 0 1px 3px rgba(0,0,0,0.1);*/
+    }
+
+}
+
+/* Phone-specific styles. */
+@media screen and (max-width: 480px) {
+    body:after {
+        content: "480";
+        display: none;
+    }
+
+    body {
+        margin: 0;
+        padding: 0;
+        font-size: 14px;
+        line-height: 1.3;
+        margin-bottom: 60px;
+    }
+
+    #authors {
+        display: none;
+    }
+
+    #page_title {
+        width: 320px;
+        height: 136px;
+        background-size: contain;
+        padding: 0;
+        font-size: 1px;
+        margin: 0 auto;
+    }
+
+    a.button {
+        padding: 0.4em 0.7em 0.3em;
+    }
+
+    label.search::before {
+        content: "Search: ";
+    }
+
+    #main_wrapper {
+        top: 0;
+        position: static;
+    }
+
+    #pet_list {
+        position: static;
+        display: block;
+        width: auto;
+        margin-top: 0;
+    }
+
+    #pet_list li {
+        padding: 0;
+    }
+
+    #pet_list a.pet_link {
+        padding: 1em;
+    }
+
+    #pet_list li.target a.pet_link {
+        background: #fff;
+        color: #000;
+    }
+
+    #popup_box {
+        position: fixed;
+        top: 0;
+        left: 0;
+        width: 100%;
+        border-width: 1px 0;
+        margin: 0;
+        display: block;
+    }
+
+    #popup_box,
+    body.has_popup #list_controls,
+    body.has_popup #page_title,
+    body.has_popup #pet_list {
+        z-index: -1;
+        /*opacity: 0.0;*/
+        /*-webkit-transition: opacity 0.2s ease-in-out;*/
+        visibility: hidden;
+    }
+
+    #pet_list.visible,
+    #list_controls.visible,
+    #popup_box.visible,
+    #page_title {
+        z-index: 1;
+        visibility: visible;
+        /*opacity: 1.0;*/
+        /*-webkit-transition: opacity 0.2s ease-in-out;*/
+    }
+
+    #popup_box h1 {
+        font-size: 18px;
+        margin: 0;
+        padding: 0.5em 0;
+    }
+
+    #popup_box .box_left {
+        margin-bottom: 1em;
+        width: 110px;
+    }
+
+    #popup_box .box_left img {
+        width: 110px;
+        height: 110px;
+    }
+
+    #popup_box .box_info {
+        margin-left: 131px;
+        font-size: 0.8em;
+    }
+
+    #close_popup {
+        clear: both;
+        padding: 0.5em 1em;
+        display: none;
+        width: 12em;
+        margin: 1em auto;
+    }
+
+    body.has_popup #close_popup {
+        display: block;
+    }
+
+}
+
+/* Tablet-specific styles. */
+@media screen and (max-width: 916px) and (min-width: 481px) {
+    body:after {
+        content: "900";
+        display: none;
+    }
+
+    #popup_box, #pet_list {
+        margin: 0;
+    }
+
+    /* Allow native-style scrolling of the pet list. */
+    #pet_list {
+        overflow: auto;
+        -webkit-overflow-scrolling: touch;
+    }
+
+    /* Work around iOS 5 scrolling display bug. */
+    /* See here for more info:
+     * http://stackoverflow.com/questions/8110580/ios5-images-disappear-when-scrolling-with-webkit-overflow-scrolling-touch
+     */
+    #pet_list > li {
+        -webkit-transform: translateZ(0);
+    }
+
+    #popup_box {
+        width: 67%;
+    }
+
+    #pet_list {
+        width: 33.5%;
+        bottom: 0;
+    }
+}
+
+/* Some minor tweaks when in landscape orientation. */
+@media screen and (max-width: 480px) and (orientation: landscape) {
+    body {
+        font-size: 9px;
+    }
+}
+
+@media screen and (max-width: 916px) and (min-width: 481px) and (orientation: landscape) {
+    body {
+        font-size: 13px;
+    }
+}
+
+@media screen and (max-height: 800px) and (min-width: 481px) {
+    #page_title {
+        width: 410px;
+        height: 175px;
+        background-size: contain;
+    }
+
+    #main_wrapper {
+        top: 18em;
+    }
+}
+
+
+
+
+
+/* TEMPORARY: */
+#list_controls label, #list_controls button {
+    opacity: 0.2;
+}
+
+label[for='list_filter'] {
+    opacity: 1.0 !important;
+}
