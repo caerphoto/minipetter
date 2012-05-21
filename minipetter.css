@@ -687,6 +687,7 @@ body.logged_in .box_buttons {
     #popup_box .box_info {
         margin-left: 131px;
         font-size: 0.8em;
+        min-height: 0;
     }
 
     #close_popup {
