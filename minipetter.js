@@ -177,25 +177,37 @@ $(function () {
 
     showPopup = function () {
         var $w = $(window),
-            ww, wh, pw, ph, // window/popup width and height
-            x, y;
+            idx,
+            info_txt,
+            view = {};
 
         if (!current_pet || !current_pet.short_name) {
             return false;
         }
 
-        last_scroll_pos = $(window).scrollTop();
+        last_scroll_pos = $w.scrollTop();
 
         document.title = current_pet.long_name + " \u00B7 Minipetter";
 
-        x = parseInt(current_pet.rarity, 10) || 0;
-        current_pet.rarity_txt = config.rarities[x].txt;
-        x = parseInt(current_pet.ob_via, 10) || 0;
-        current_pet.ob_via_txt = config.sources[x].txt;
-        x = parseInt(current_pet.type, 10) || 0;
-        current_pet.type_txt = config.types[x].txt;
+        // Transform numerical rarity (etc.) into text equivalent.
+        $.extend(view, current_pet);
+        idx = parseInt(current_pet.rarity, 10) || 0;
+        view.rarity = config.rarities[idx].txt;
+        idx = parseInt(current_pet.ob_via, 10) || 0;
+        view.source = config.sources[idx].txt;
+        idx = parseInt(current_pet.type, 10) || 0;
+        view.type = config.types[idx].txt;
 
-        $popup_box.html(Mustache.to_html(popup_tmpl, current_pet));
+        // Convert "This is some info.  @@this is flavour text." into
+        // appropriate HTML.
+        info_txt = current_pet.info.split("@@");
+        // Trim whitespace.
+        view.info = info_txt[0].replace(/^\s*(.*)\s*$/, "$1");
+        if (info_txt.length > 1) {
+            view.flavour_text = info_txt[1].replace(/^\s*'?(.*)'\s*$/, '$1');
+        }
+
+        $popup_box.html(Mustache.to_html(popup_tmpl, view));
 
         $body.addClass("has_popup");
         $popup_box.addClass("visible");
@@ -205,8 +217,8 @@ $(function () {
         window.scrollTo(0, 1);
 
 
-        ph = $("#pet_" + current_pet.short_name);
-        ph.addClass("target");
+        $w = $("#pet_" + current_pet.short_name);
+        $w.addClass("target");
 
         return true;
     };
@@ -323,6 +335,8 @@ $(function () {
         } else {
             $.extend(view, current_pet);
         }
+
+        view.info = view.info.replace(/<BR><BR>/, "\n\n@@");
 
         $editor.html(Mustache.to_html(editor_tmpl, view));
 
