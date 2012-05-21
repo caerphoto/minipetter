@@ -5,6 +5,8 @@ include "config.php";
 function get_all_minipets() {
     global $db_conn, $username, $pw, $db_cols;
 
+    ob_start("ob_gzhandler");
+
     $dbh = new PDO($db_conn, $username, $pw);
     $query = $dbh->prepare("select " .
         join(",", $db_cols) .
