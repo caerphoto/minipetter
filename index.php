@@ -22,7 +22,7 @@ include "updates.php";
       }
 
       body.medium_screen #main_wrapper {
-        top: 17em;
+        top: 18em;
       }
 
       body.medium_screen #authors {
@@ -61,6 +61,9 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'true') {
     band.</div>
 
     <h1 id="page_title">Minipetter</h1>
+
+    <p>What's this all about? :: Click <a href="#">here</a> for Details!</p>
+
 
     <div id="list_controls" class="visible">
       <label for="list_filter" class="search"><input id="list_filter" type="search"

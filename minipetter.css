@@ -42,6 +42,10 @@ h2 {
             height 0.3s ease-out;
 }
 
+#page_title + p {
+    text-align: center;
+}
+
 #authors {
     font-size: 0.9em;
     color: rgba(0,0,0,0.4);
@@ -156,7 +160,7 @@ body.logged_in a[href='#log_out'] {
     visibility: hidden;
     overflow: visible;
     position: relative;
-    padding-top: 0.5em;
+    padding-top: 1em;
 }
 
 #list_controls.visible {
@@ -208,7 +212,7 @@ body.logged_in a[href='#add'], body.logged_in a[href='#new_update'] {
     position: absolute;
     width: 100%;
     max-width: 900px;
-    top: 24em;
+    top: 25em;
     bottom: 0;
 
     -webkit-transition: top 0.3s ease-out;
@@ -223,6 +227,7 @@ body.logged_in a[href='#add'], body.logged_in a[href='#new_update'] {
 
 
 #pet_list {
+    -webkit-overflow-scrolling: touch;
     position: absolute;
     right: 0;
     top: 0;
@@ -246,6 +251,10 @@ body.logged_in a[href='#add'], body.logged_in a[href='#new_update'] {
 }
 
 #pet_list li {
+    /* Work around iOS 5 scrolling display bug. */
+    /* See here for more info:
+     * http://stackoverflow.com/questions/8110580/ios5-images-disappear-when-scrolling-with-webkit-overflow-scrolling-touch */
+    -webkit-transform: translateZ(0);
     margin: 0;
     padding: 0 0.5em 0 0;
     position: relative;
@@ -776,15 +785,6 @@ body.has_popup #updater.visible {
     /* Allow native-style scrolling of the pet list. */
     #pet_list {
         overflow: auto;
-        -webkit-overflow-scrolling: touch;
-    }
-
-    /* Work around iOS 5 scrolling display bug. */
-    /* See here for more info:
-     * http://stackoverflow.com/questions/8110580/ios5-images-disappear-when-scrolling-with-webkit-overflow-scrolling-touch
-     */
-    #pet_list > li {
-        -webkit-transform: translateZ(0);
     }
 
     #popup_box {
@@ -827,18 +827,20 @@ body.has_popup #updater.visible {
     }
 
     #main_wrapper {
-        top: 17em;
+        top: 18em;
         -webkit-transition: top 0.3s ease-out;
         -moz-transition: top 0.3s ease-out;
         transition: top 0.3s ease-out;
     }
 }
 
-/* TEMPORARY: */
+/* TEMPORARY: hidden until they actually do anything */
 #list_controls label, #list_controls button {
     opacity: 0.2;
+    display: none;
 }
 
 label[for='list_filter'] {
     opacity: 1.0 !important;
+    display: inline-block !important;
 }
