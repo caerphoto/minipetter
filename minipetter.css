@@ -564,6 +564,7 @@ body.logged_in .box_buttons {
 
 #last_update_value {
     white-space: pre-line;
+    max-width: 500px;
 }
 
 #updater {

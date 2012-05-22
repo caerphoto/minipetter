@@ -211,6 +211,8 @@ function delete_pet() {
 
     if (!$result) {
         header('HTTP/1.0 500');
+        $error = $query->errorInfo();
+        return json_encode($error);
     }
 
     return json_encode($result);
@@ -229,6 +231,8 @@ function add_update() {
         return json_encode(false);
     }
 
+    $value = stripslashes($value);
+
     $dbh = new PDO($db_conn, $username, $pw);
     $query = $dbh->prepare("insert into updates (date, value) values (:date, :value);");
     $query->bindParam(":date", $date);
@@ -240,6 +244,8 @@ function add_update() {
 
     if (!$result) {
         header('HTTP/1.0 500');
+        $error = $query->errorInfo();
+        return json_encode($error);
     }
 
     $result = array(
