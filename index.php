@@ -62,7 +62,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'true') {
 
     <h1 id="page_title">Minipetter</h1>
 
-    <p>What's this all about? :: Click <a href="#">here</a> for Details!</p>
+    <p>What's this all about? :: Click <a href="http://www.alternative-blog.net/2012/05/presenting-minipets-database-q.html">here</a> for Details!</p>
 
 
     <div id="list_controls" class="visible">
