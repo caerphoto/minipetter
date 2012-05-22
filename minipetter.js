@@ -517,7 +517,7 @@ $(function () {
 
     });
 
-    if ($(window).height() < 800 && $(window).height() > 481) {
+    if ($(window).height() < 900 && $(window).height() > 481) {
         $(document.body).addClass("medium_screen");
     }
 

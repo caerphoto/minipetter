@@ -752,7 +752,7 @@ body.logged_in .box_buttons {
     }
 }
 
-@media screen and (max-height: 800px) and (min-width: 481px) {
+@media screen and (max-height: 900px) and (min-width: 481px) {
     #page_title {
         width: 369px;
         height: 158px;
