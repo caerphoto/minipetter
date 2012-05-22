@@ -7,6 +7,7 @@ $(function () {
         $list_filter = $("#list_filter"),
         $pet_list = $("#pet_list"),
         $main_wrapper = $("#main_wrapper"),
+        $updater = $("#updater"),
         $body = $(document.body),
         close_btn,
 
@@ -34,8 +35,10 @@ $(function () {
         deriveShortName,
         logIn, logOut,
         fetchPetData,
-        buildLists, savePet, deletePet,
-        showPopup, hidePopup, showEditor, hideEditor, showList, hideList;
+        buildLists, savePet, deletePet, saveUpdate,
+
+        showPopup, hidePopup, showEditor, hideEditor, showList, hideList,
+        showUpdater, hideUpdater;
 
     if (window.getComputedStyle) {
         screen_size = window.getComputedStyle(document.body,':after').getPropertyValue('content');
@@ -351,6 +354,7 @@ $(function () {
         $editor.toggleClass("is_new_pet", !!is_new_pet);
 
         $editor.find("input[name='long_name']").focus();
+        $body.addClass("has_popup");
     };
 
     hideEditor = function () {
@@ -358,6 +362,7 @@ $(function () {
         if (document.activeElement !== document.body) {
             document.activeElement.blur();
         }
+        $body.removeClass("has_popup");
     };
 
     showList = function () {
@@ -371,6 +376,37 @@ $(function () {
         $list_controls.removeClass("visible");
     };
 
+    saveUpdate = function (callback) {
+        var req = {},
+            $textarea = $updater.find("textarea");
+
+        req.action = "add_update";
+        req.value = $textarea.val();
+
+        $.ajax({
+            data: req,
+            type: "POST",
+
+            success: function (saved_update) {
+                $("#last_update_date").text(saved_update.date);
+                $("#last_update_value").text(saved_update.value);
+                $textarea.val("");
+                if (typeof callback === "function") {
+                    callback();
+                }
+            }
+        });
+    };
+
+    showUpdater = function () {
+        $updater.addClass("visible");
+        $updater.find("textarea").focus();
+    };
+
+    hideUpdater = function () {
+        $updater.removeClass("visible");
+    };
+
     // Main hash-based route-handling function.
     $(window).bind("hashchange", function (evt) {
         var h = window.location.hash,
@@ -380,6 +416,8 @@ $(function () {
             showList();
             hidePopup();
             hideEditor();
+            hideUpdater();
+
             $pet_list.find(".target").removeClass("target");
             document.title = "Minipetter";
             return;
@@ -401,23 +439,27 @@ $(function () {
                 hidePopup();
                 showEditor(true);
                 break;
+
             case "edit":
                 current_pet = pet_lookup[route[0]];
                 hideList();
                 hidePopup();
                 showEditor();
                 break;
+
             case "save":
                 current_pet = pet_lookup[route[0]];
                 savePet(false, function (updated_pet) {
                     window.location.hash = updated_pet.short_name;
                 });
                 break;
+
             case "create":
                 savePet(true, function (new_pet) {
                     window.location.hash = new_pet.short_name;
                 });
                 break;
+
             case "delete":
                 current_pet = pet_lookup[route[0]];
                 if (current_pet &&
@@ -427,12 +469,26 @@ $(function () {
                     deletePet();
                 }
                 break;
+
             case "log_in":
                 logIn();
                 break;
+
             case "log_out":
                 logOut();
                 break;
+
+            case "new_update":
+                hidePopup();
+                showUpdater();
+                break;
+
+            case "save_update":
+                saveUpdate(function () {
+                    window.location.hash = "";
+                });
+                break;
+
             default:
                 // Simply show pet info.
                 current_pet = pet_lookup[route[0]] || {};
@@ -449,11 +505,13 @@ $(function () {
         buildLists(this.value);
     });
 
-    $editor.delegate("textarea", "focus", function () {
+    $body.delegate("textarea", "focus", function () {
         $(this.parentNode).addClass("focus");
     }).delegate("textarea", "blur", function () {
         $(this.parentNode).removeClass("focus");
-    }).delegate("#long_name_input", "keyup", function() {
+    });
+
+    $editor.delegate("#long_name_input", "keyup", function() {
         var sn = deriveShortName(this.value);
 
         if (!$editor.hasClass("is_new_pet")) {

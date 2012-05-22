@@ -5,6 +5,7 @@ include "config.php";
 function get_all_minipets() {
     global $db_conn, $username, $pw, $db_cols;
 
+    // gzip output, since it's quite big.
     ob_start("ob_gzhandler");
 
     $dbh = new PDO($db_conn, $username, $pw);
@@ -215,6 +216,40 @@ function delete_pet() {
     return json_encode($result);
 }
 
+function add_update() {
+    check_auth();
+
+    global $db_conn, $username, $pw;
+
+    $value = isset($_REQUEST['value']) ? $_REQUEST['value'] : null;
+    $date = time();
+
+    if (!$value) {
+        header("HTTP/1.0 400 Bad Request");
+        return json_encode(false);
+    }
+
+    $dbh = new PDO($db_conn, $username, $pw);
+    $query = $dbh->prepare("insert into updates (date, value) values (:date, :value);");
+    $query->bindParam(":date", $date);
+    $query->bindParam(":value", $value);
+
+    $result = $query->execute();
+
+    unset($dbh);
+
+    if (!$result) {
+        header('HTTP/1.0 500');
+    }
+
+    $result = array(
+        "date" => gmdate("D, d M Y, H:i", $date),
+        "value" => $value
+    );
+
+    return json_encode($result);
+}
+
 $req_method = isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : null;
 $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : null;
 
@@ -222,7 +257,12 @@ session_start();
 header('Content-Type: application/json');
 
 if ($req_method == "POST") {
-    echo add_pet();
+    if ($action === "add_update") {
+        echo add_update();
+    } else {
+        echo add_pet();
+    }
+
 } else {
     switch ($action) {
         case "delete":

@@ -137,11 +137,6 @@ input[type='search'] {
 
 .button.log_out {
     display: none;
-    background-color: #ee8;
-}
-
-.button.log_out:hover {
-    background-color: #ffa;
 }
 
 body.logged_in label[for='password'], body.logged_in a[href='#log_in'] {
@@ -193,7 +188,19 @@ a[href='#add']:hover {
     background-color: #dfc;
 }
 
-body.logged_in a[href='#add'] {
+a[href='#new_update'] {
+    display: none;
+    position: absolute;
+    top: -3em;
+    left: 0;
+    background-color: #ee8;
+}
+
+a[href='#new_update']:hover {
+    background-color: #ffa;
+}
+
+body.logged_in a[href='#add'], body.logged_in a[href='#new_update'] {
     display: block;
 }
 
@@ -213,9 +220,7 @@ body.logged_in a[href='#add'] {
     display: none;
 }
 
-#list_hint {
-    padding-left: 50px;
-}
+
 
 #pet_list {
     position: absolute;
@@ -325,7 +330,7 @@ body.logged_in #pet_list .button.delete {
     display: block;
 }
 
-#popup_box, #editor {
+#popup_box, #editor, #updater {
     position: absolute;
     display: none;
 
@@ -347,7 +352,9 @@ body.logged_in #pet_list .button.delete {
     box-shadow: 0 1px 3px rgba(0,0,0,0.1);
 }
 
-#popup_box.visible, #editor.visible {
+#popup_box.visible,
+body.logged_in #editor.visible,
+body.logged_in #updater.visible {
     display: block;
 }
 
@@ -539,12 +546,12 @@ body.logged_in .box_buttons {
     clear: both;
 }
 
-#editor label[for='info'] + div {
+.textarea_wrapper{
     padding: 0.5em;
     background: #fff;
 }
 
-#editor textarea {
+.textarea_wrapper textarea {
     display: block;
     padding: 0;
     margin: 0;
@@ -553,6 +560,31 @@ body.logged_in .box_buttons {
     height: 10em;
     resize: none;
     outline: none;
+}
+
+#last_update_value {
+    white-space: pre-line;
+}
+
+#updater {
+    padding: 1em;
+    padding-bottom: 4em;
+    width: 500px;
+    margin-top: 1em;
+    z-index: 0;
+}
+
+#updater a[href='#save_update'] {
+    position: absolute;
+    bottom: 1em;
+    right: 1em;
+}
+
+body.has_popup #list_hint,
+body.has_popup #last_update_date,
+body.has_popup #last_update_value,
+body.has_popup #updater.visible {
+    display: none;
 }
 
 /* Common styles for touch-based devices, i.e. tablets and phones. */

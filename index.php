@@ -1,6 +1,6 @@
 <?php
 session_start();
-include "config.php";
+include "updates.php";
 ?>
 <!DOCTYPE html>
 <html>
@@ -76,14 +76,26 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'true') {
       <button id="reset_filters">reset</button>
 
       <a class="button visible" href="#add" title="Shortcut: A">add pet</a>
+      <a class="button visible" href="#new_update">new update</a>
     </div>
 
     <div id="main_wrapper">
       <p id="list_hint">Select a pet from the list on the right &rarr;</p>
+      <h2 id="last_update_date"><?php echo $last_update_date; ?></h2>
+      <p id="last_update_value"><?php echo $last_update_value; ?></p>
+
       <ul id="pet_list" class="visible"></ul>
 
       <div id="popup_box"></div>
       <div id="editor"></div>
+
+      <div id="updater">
+        <label for="update_text">Add new update:</label>
+        <div class="textarea_wrapper">
+          <textarea name="update_text"></textarea>
+        </div>
+        <a class="button change" href="#save_update">save</a>
+      </div>
 
     </div>
 

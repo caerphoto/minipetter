@@ -12,14 +12,14 @@ if ($_SERVER['SERVER_NAME'] !== "caerphoto.com") {
 $db_cols = array(
     'short_name', // text (derived from long_name)
     'long_name',  // text
-    'type',       // text (critter, mechanical etc.)
-    'rarity',     // ?? text for now
+    'type',       // integer (see $types below)
+    'rarity',     // integer (see $rarities below)
     'img_src',    // text (URL)
     'x',          // integer (if actual coord is 52.4, store 524)
     'y',
-    'ob_via',     // integer (1 = quest, 2 = vendor, 3 = drop, etc.)
+    'ob_via',     // integer (see $sources below)
     'loc',        // text (e.g. "Scarlet Monastery Graveyard")
-    'info'        // Misc additional info.
+    'info'        // Text; misc additional info, including flavour text.
 );
 
 $types = array(
