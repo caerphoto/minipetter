@@ -266,14 +266,12 @@ body.logged_in a[href='#add'] {
 #pet_list li.target a.pet_link {
     background-color: #def;
     color: #000;
-    /*box-shadow: 0 1px 3px rgba(64, 192, 255, 0.2);*/
     border-color: #ace;
 }
 
 #pet_list li:hover a.pet_link {
     background-color: #ddd;
     color: #000;
-    /*box-shadow: 0 1px 3px rgba(0,0,0, 0.2);*/
     border-color: #aaa;
 }
 
@@ -767,7 +765,7 @@ body.logged_in .box_buttons {
     }
 }
 
-@media screen and (max-height: 900px) and (min-width: 481px) {
+@media screen and (max-height: 900px) {
     #page_title {
         width: 369px;
         height: 158px;

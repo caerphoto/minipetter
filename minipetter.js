@@ -160,11 +160,11 @@ $(function () {
             }
         }
 
-        //for (i = 0, l = filtered_list.length; i < l; i += 1) {
-            //p = filtered_list[i];
-            //idx = +p.rarity;
-            //p.rarity_txt = config.rarities[idx].txt.toLowerCase();
-        //}
+        for (i = 0, l = filtered_list.length; i < l; i += 1) {
+            p = filtered_list[i];
+            idx = +p.rarity;
+            p.rarity_txt = config.rarities[idx].txt.toLowerCase();
+        }
 
         $pet_list.html(Mustache.to_html(list_tmpl, { pet_data: filtered_list }));
 
