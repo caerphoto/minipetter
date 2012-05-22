@@ -4,23 +4,33 @@
  * Also sets appropriate (I hope) headers re: cache.
  */
 
-$name = "screenshots/" . $_GET['name'] . ".jpg";
+$name = $_GET['name'];
 
-if (file_exists($name)) {
-    header("Cache-Control: max-age=86400"); // 24 hours
-} else {
-    $name = "screenshots/placeholder.jpg";
-    header("Cache-Control: max-age=604800"); // 1 week
+function dumpImage ($name) {
+    header("Last-Modified: " . gmdate("D, d M Y H:i:s \G\M\T", filemtime($name)));
+    header("Content-Length: " . filesize($name));
+    $fp = @fopen($name, 'rb');
+    fpassthru($fp);
 }
 
-header("Last-Modified: " . gmdate("D, d M Y H:i:s \G\M\T", filemtime($name)));
+if ($name === "placeholder") {
+    $name = "screenshots/placeholder.png";
+    header("Content-Type: image/png");
+    header("Cache-Control: max-age=86400"); // 24 hours
+    dumpImage($name);
 
-$a_week_from_now = time() + 604800;
-header("Expires: " . gmdate("D, d M Y H:i:s \G\M\T", $a_week_from_now));
+} else {
+    $name = "screenshots/" . $name . ".jpg";
 
-$fp = @fopen($name, 'rb');
+    if (file_exists($name)) {
+        $a_week_from_now = time() + 604800;
+        header("Content-Type: image/jpeg");
+        header("Cache-Control: max-age=604800"); // 1 week
+        header("Expires: " . gmdate("D, d M Y H:i:s \G\M\T", $a_week_from_now));
+        dumpImage($name);
 
-header("Content-Type: image/jpeg");
-header("Content-Length: " . filesize($name));
-
-fpassthru($fp);
+    } else {
+        header("HTTP/1.1 307 Temporary Redirect");
+        header("Location: img.php?name=placeholder");
+    }
+}
