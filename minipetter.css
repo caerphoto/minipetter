@@ -664,6 +664,18 @@ body.has_popup #updater.visible {
         position: static;
     }
 
+    #last_update_date, #last_update_value {
+        padding: 0.5em;
+    }
+
+    #last_update_date {
+        margin: 0;
+    }
+
+    #last_update_value {
+        margin-bottom: 1em;
+    }
+
     #pet_list {
         position: static;
         display: block;
