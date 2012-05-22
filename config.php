@@ -1,7 +1,7 @@
 <?php
 include 'private.php'; // passwords and DB info for the DB on caerphoto.com
 
-if ($_SERVER['SERVER_NAME'] !== "caerphoto.com") {
+if (preg_match('/caerphoto\.com/', $_SERVER['SERVER_NAME']) === 0) {
     $db_conn = "mysql:host=localhost;dbname=caerpho_minipets;unix_socket=/tmp/mysql.sock";
     $username = "";
     $pw = "";
