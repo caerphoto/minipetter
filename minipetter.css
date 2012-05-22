@@ -27,8 +27,19 @@ h2 {
     height: 250px;
     margin: 1em auto 0 auto;
     background-image: url('logo.png');
+    background-size: contain;
     text-indent: -999em;
     padding: 0;
+
+        -webkit-transition:
+            width 0.3s ease-out,
+            height 0.3s ease-out;
+        -moz-transition:
+            width 0.3s ease-out,
+            height 0.3s ease-out;
+        transition:
+            width 0.3s ease-out,
+            height 0.3s ease-out;
 }
 
 #authors {
@@ -192,6 +203,10 @@ body.logged_in a[href='#add'] {
     max-width: 900px;
     top: 24em;
     bottom: 0;
+
+    -webkit-transition: top 0.3s ease-out;
+    -moz-transition: top 0.3s ease-out;
+    transition: top 0.3s ease-out;
 }
 
 #close_popup {
@@ -756,11 +771,23 @@ body.logged_in .box_buttons {
     #page_title {
         width: 369px;
         height: 158px;
-        background-size: contain;
+
+        -webkit-transition:
+            width 0.3s ease-out,
+            height 0.3s ease-out;
+        -moz-transition:
+            width 0.3s ease-out,
+            height 0.3s ease-out;
+        transition:
+            width 0.3s ease-out,
+            height 0.3s ease-out;
     }
 
     #main_wrapper {
-        top: 18em;
+        top: 17em;
+        -webkit-transition: top 0.3s ease-out;
+        -moz-transition: top 0.3s ease-out;
+        transition: top 0.3s ease-out;
     }
 }
 
