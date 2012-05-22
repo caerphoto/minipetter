@@ -10,6 +10,35 @@ include "config.php";
     <link rel="stylesheet" href="minipetter.css">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, user-scalable=no, maximum-scale=1.0">
     <meta name="apple-mobile-web-app-capable" content="yes" />
+<?php // Workaround for IE<9 lack of support for media queries ?>
+ <!--[if lt IE 9]>
+     <style>
+      body.medium_screen #page_title {
+          background-image: none;
+          width: 369px;
+          height: 158px;
+          filter: progid:DXImageTransform.Microsoft.AlphaImageLoader(
+              src='logo.png', sizingMethod='scale');
+      }
+
+      body.medium_screen #main_wrapper {
+        top: 17em;
+      }
+
+      body.medium_screen #authors {
+        top: 0.7em;
+        left: 0.5em;
+        bottom: auto;
+        font-size: 0.7em;
+        color: #888;
+      }
+
+      body.medium_screen #login_panel {
+        top: 0.5em;
+      }
+    </style>
+ <![endif]-->
+
   </head>
 
 <?php

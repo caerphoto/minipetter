@@ -754,8 +754,8 @@ body.logged_in .box_buttons {
 
 @media screen and (max-height: 800px) and (min-width: 481px) {
     #page_title {
-        width: 410px;
-        height: 175px;
+        width: 369px;
+        height: 158px;
         background-size: contain;
     }
 
@@ -763,10 +763,6 @@ body.logged_in .box_buttons {
         top: 18em;
     }
 }
-
-
-
-
 
 /* TEMPORARY: */
 #list_controls label, #list_controls button {
