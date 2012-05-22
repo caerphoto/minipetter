@@ -336,8 +336,6 @@ $(function () {
             $.extend(view, current_pet);
         }
 
-        view.info = view.info.replace(/<BR><BR>/, "\n\n@@");
-
         $editor.html(Mustache.to_html(editor_tmpl, view));
 
         // Annoyingly you can't specify a <select>'s value in a template, as you
