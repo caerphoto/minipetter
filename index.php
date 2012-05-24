@@ -90,7 +90,9 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'true') {
       <h2 id="last_update_date"><?php echo $last_update_date; ?></h2>
       <p id="last_update_value"><?php echo $last_update_value; ?></p>
 
-      <ul id="pet_list" class="visible"></ul>
+      <ul id="pet_list" class="visible">
+        <li class="loading"><div class="loading_spinner">&#9650;</div>Loading pet data&hellip;</li>
+      </ul>
 
       <div id="popup_box"></div>
       <div id="editor"></div>

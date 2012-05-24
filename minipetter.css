@@ -128,6 +128,25 @@ input[type='search'] {
     width: 12em;
 }
 
+@-webkit-keyframes rotate {
+    from {
+        -webkit-transform:rotate(0deg);
+    }
+
+    to {
+        -webkit-transform:rotate(360deg);
+    }
+}
+
+.loading_spinner {
+    display: inline-block;
+    margin-right: 0.5em;
+    -webkit-animation-name: rotate;
+    -webkit-animation-duration: 1.5s;
+    -webkit-animation-iteration-count: infinite;
+    -webkit-animation-timing-function: linear;
+}
+
 .clear_float {
     clear: both;
     float: none;
@@ -598,7 +617,7 @@ body.has_popup #updater.visible {
 
 /* Common styles for touch-based devices, i.e. tablets and phones. */
 @media screen and (max-width: 916px) {
-    #login_panel, #list_hint, #editor, #last_update_date, #last_update_value {
+    #login_panel, #list_hint, #editor {
         display: none;
     }
 
@@ -647,7 +666,7 @@ body.has_popup #updater.visible {
         overflow-x: hidden;
     }
 
-    #authors {
+    #authors, #last_update_date, #last_update_value, #page_title + p {
         display: none;
     }
 
@@ -668,9 +687,13 @@ body.has_popup #updater.visible {
         content: "Search: ";
     }
 
+    #list_controls {
+        padding-top: 0.25em;
+    }
+
     #main_wrapper {
-        top: 0;
-        position: relative;
+        /*top: 0;*/
+        position: static;
     }
 
     #last_update_date, #last_update_value {
@@ -688,12 +711,9 @@ body.has_popup #updater.visible {
     #pet_list {
         position: static;
         background: #fff;
-        left: 0;
-        top: 0;
-        bottom: auto;
         display: block;
         width: auto;
-        margin-top: 0;
+        margin-top: 1em;
     }
 
     #pet_list li {
