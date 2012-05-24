@@ -181,7 +181,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'true') {
       {{/flavour_text}}
       </div>
       <div id="button_wrapper">
-        <a class="button" id="close_popup" href="#">back to pet list</a>
+        <a class="button" id="close_popup" href="#_">back to pet list</a>
       </div>
     </script>
 

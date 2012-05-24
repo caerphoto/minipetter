@@ -96,7 +96,7 @@ $(function () {
             data: { password: pw, action: "login" },
             success: function () {
                 $body.addClass("logged_in");
-                window.location.hash = current_pet.short_name || "";
+                window.location.hash = current_pet.short_name || "_";
             },
             error: function () {
                 window.alert("Incorrect password.");
@@ -112,7 +112,7 @@ $(function () {
             data: { action: "logout" },
             success: function () {
                 $body.removeClass("logged_in");
-                window.location.hash = current_pet.short_name || "";
+                window.location.hash = current_pet.short_name || "_";
             }
         });
     };
@@ -187,7 +187,7 @@ $(function () {
             return false;
         }
 
-        last_scroll_pos = $w.scrollTop();
+        //last_scroll_pos = $w.scrollTop();
 
         document.title = current_pet.long_name + " \u00B7 Minipetter";
 
@@ -225,7 +225,7 @@ $(function () {
     hidePopup = function () {
         $popup_box.removeClass("visible");
         $body.removeClass("has_popup");
-        $(window).scrollTop(last_scroll_pos);
+        //$(window).scrollTop(last_scroll_pos);
     };
 
     savePet = function (is_new_pet, callback) {
@@ -408,7 +408,7 @@ $(function () {
         var h = window.location.hash,
             route, action;
 
-        if (!h) {
+        if (!h || h === "#_") {
             showList();
             hidePopup();
             hideEditor();
@@ -481,7 +481,7 @@ $(function () {
 
             case "save_update":
                 saveUpdate(function () {
-                    window.location.hash = "";
+                    window.location.hash = "_";
                 });
                 break;
 
@@ -568,7 +568,7 @@ $(function () {
         if (evt.keyCode === 13 && (evt.ctrlKey || evt.metaKey)) {
             window.location.hash = current_pet.short_name + "/save";
         } else if (evt.keyCode === 27) {
-            window.location.hash = current_pet.short_name || "";
+            window.location.hash = current_pet.short_name || "_";
         }
 
     });
@@ -578,10 +578,6 @@ $(function () {
     }
 
     $.ajaxSetup(ajax_defaults);
-    setTimeout(function (){
-        // Hide the address bar
-        window.scrollTo(0, 1);
-    }, 0);
 
     setupFilterOptions();
 
@@ -591,6 +587,10 @@ $(function () {
 
         buildLists();
         $(window).trigger("hashchange");
+        setTimeout(function () {
+            // Hide the address bar
+            window.scrollTo(0, 1);
+        }, 0);
     });
 
 });
