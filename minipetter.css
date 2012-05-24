@@ -593,7 +593,7 @@ body.has_popup #list_hint,
 body.has_popup #last_update_date,
 body.has_popup #last_update_value,
 body.has_popup #updater.visible {
-    display: none;
+    visibility: hidden;
 }
 
 /* Common styles for touch-based devices, i.e. tablets and phones. */
