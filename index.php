@@ -56,7 +56,7 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'true') {
       <a class="button log_out" href="#log_out">log out</a>
     </div>
 
-    <div id="authors">Minipetter project by <a href="/">Andy</a> and
+    <div id="authors">Minipetter project by <a href="http://caerphoto.com/">Andy</a> and
     <a href="http://www.alternative-blog.net/">The Godmother</a>.  We are not a
     band.</div>
 
