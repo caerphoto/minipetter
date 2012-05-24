@@ -598,7 +598,7 @@ body.has_popup #updater.visible {
 
 /* Common styles for touch-based devices, i.e. tablets and phones. */
 @media screen and (max-width: 916px) {
-    #login_panel, #list_hint, #editor {
+    #login_panel, #list_hint, #editor, #last_update_date, #last_update_value {
         display: none;
     }
 

@@ -9,6 +9,9 @@ include "updates.php";
     <link href='http://fonts.googleapis.com/css?family=Nobile:400,400italic,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="minipetter.css">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, user-scalable=no, maximum-scale=1.0">
+<?php // This meta allows the user to place the page on their home screen and
+      // launch it like a native app, in a separate, UI-less version of Safari
+?>
     <meta name="apple-mobile-web-app-capable" content="yes" />
 <?php // Workaround for IE<9 lack of support for media queries ?>
  <!--[if lt IE 9]>
