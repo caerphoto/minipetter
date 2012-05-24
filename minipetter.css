@@ -11,6 +11,7 @@ body {
     font-family: "Nobile", "Tahoma", sans-serif;
     font-size: 14px;
     line-height: 1.6;
+
 }
 
 h1 {
@@ -222,9 +223,8 @@ body.logged_in a[href='#add'], body.logged_in a[href='#new_update'] {
 
 #close_popup {
     display: none;
+    z-index: 6;
 }
-
-
 
 #pet_list {
     -webkit-overflow-scrolling: touch;
@@ -254,7 +254,6 @@ body.logged_in a[href='#add'], body.logged_in a[href='#new_update'] {
     /* Work around iOS 5 scrolling display bug. */
     /* See here for more info:
      * http://stackoverflow.com/questions/8110580/ios5-images-disappear-when-scrolling-with-webkit-overflow-scrolling-touch */
-    -webkit-transform: translateZ(0);
     margin: 0;
     padding: 0 0.5em 0 0;
     position: relative;
@@ -645,6 +644,7 @@ body.has_popup #updater.visible {
         font-size: 14px;
         line-height: 1.3;
         margin-bottom: 60px;
+        overflow-x: hidden;
     }
 
     #authors {
@@ -670,7 +670,7 @@ body.has_popup #updater.visible {
 
     #main_wrapper {
         top: 0;
-        position: static;
+        position: relative;
     }
 
     #last_update_date, #last_update_value {
@@ -687,6 +687,10 @@ body.has_popup #updater.visible {
 
     #pet_list {
         position: static;
+        background: #fff;
+        left: 0;
+        top: 0;
+        bottom: auto;
         display: block;
         width: auto;
         margin-top: 0;
@@ -709,30 +713,24 @@ body.has_popup #updater.visible {
         position: fixed;
         top: 0;
         left: 0;
+        bottom: 0;
         width: 100%;
-        border-width: 1px 0;
+
+        border: none;
+        box-shadow: none;
         margin: 0;
         display: block;
-    }
 
-    #popup_box,
-    body.has_popup #list_controls,
-    body.has_popup #page_title,
-    body.has_popup #pet_list {
         z-index: -1;
-        /*opacity: 0.0;*/
-        /*-webkit-transition: opacity 0.2s ease-in-out;*/
-        visibility: hidden;
+        opacity: 0;
+        -webkit-transition: opacity 0.2s linear, z-index 0.2s linear;
     }
 
-    #pet_list.visible,
-    #list_controls.visible,
-    #popup_box.visible,
-    #page_title {
-        z-index: 1;
-        visibility: visible;
-        /*opacity: 1.0;*/
-        /*-webkit-transition: opacity 0.2s ease-in-out;*/
+    body.has_popup #popup_box {
+        z-index: 9;
+        opacity: 1;
+
+        -webkit-transition: opacity 0.2s linear, z-index 0.2s linear;
     }
 
     #popup_box h1 {
@@ -755,18 +753,21 @@ body.has_popup #updater.visible {
         margin-left: 131px;
         font-size: 0.8em;
         min-height: 0;
+        z-index: -1;
+    }
+
+    #button_wrapper {
+        position: absolute;
+        bottom: 1em;
+        left: 0;
+        right: 0;
+        text-align: center;
+        z-index: 999;
     }
 
     #close_popup {
-        clear: both;
         padding: 0.5em 1em;
-        display: none;
-        width: 12em;
-        margin: 1em auto;
-    }
-
-    body.has_popup #close_popup {
-        display: block;
+        display: inline-block;
     }
 
 }
@@ -785,15 +786,16 @@ body.has_popup #updater.visible {
     /* Allow native-style scrolling of the pet list. */
     #pet_list {
         overflow: auto;
+        width: 33.5%;
+        bottom: 0;
+    }
+
+    #pet_list li {
+        -webkit-transform: translateZ(0);
     }
 
     #popup_box {
         width: 67%;
-    }
-
-    #pet_list {
-        width: 33.5%;
-        bottom: 0;
     }
 }
 

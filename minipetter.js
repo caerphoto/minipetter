@@ -175,7 +175,6 @@ $(function () {
             l = window.location.hash.slice(1);
             $pet_list.find("#pet_" + l).addClass("target");
         }
-
     };
 
     showPopup = function () {
@@ -217,9 +216,6 @@ $(function () {
         $editor.removeClass("visible");
         $pet_list.find(".target").removeClass("target");
 
-        window.scrollTo(0, 1);
-
-
         $w = $("#pet_" + current_pet.short_name);
         $w.addClass("target");
 
@@ -229,6 +225,7 @@ $(function () {
     hidePopup = function () {
         $popup_box.removeClass("visible");
         $body.removeClass("has_popup");
+        $(window).scrollTop(last_scroll_pos);
     };
 
     savePet = function (is_new_pet, callback) {
@@ -366,7 +363,6 @@ $(function () {
     };
 
     showList = function () {
-        $(window).scrollTop(last_scroll_pos);
         $pet_list.addClass("visible");
         $list_controls.addClass("visible");
     };
@@ -496,6 +492,10 @@ $(function () {
                 showPopup();
                 showList(); // might still be hidden if on a phone
         }
+    });
+
+    $body.bind("click", function (evt) {
+        $(evt.target).addClass("clicked");
     });
 
     $list_filter.keyup(function () {

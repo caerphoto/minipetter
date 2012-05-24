@@ -153,10 +153,13 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'true') {
       <h2 id="popup_name">{{long_name}}</h2>
       <div class="box_left">
         <img id="popup_img" class="box_img"
-        src="{{#img_src}}
-{{img_src}}{{/img_src}}
-      {{^img_src}}
-img.php?name={{short_name}}{{/img_src}}" width="200" height="200" alt="Picture of {{long_name}}">
+        {{#img_src}}
+          src="{{img_src}}"
+        {{/img_src}}
+        {{^img_src}}
+          src="img.php?name={{short_name}}"
+        {{/img_src}}
+          width="200" height="200" alt="Picture of {{long_name}}">
 
 
       {{#loc}}
@@ -177,7 +180,9 @@ img.php?name={{short_name}}{{/img_src}}" width="200" height="200" alt="Picture o
         <p class="flavour_text">{{flavour_text}}</p>
       {{/flavour_text}}
       </div>
-      <a class="button" id="close_popup" href="#">back to pet list</a>
+      <div id="button_wrapper">
+        <a class="button" id="close_popup" href="#">back to pet list</a>
+      </div>
     </script>
 
 <?php
@@ -269,8 +274,8 @@ create
             rarities: <?php echo json_encode($rarities); ?>
         };
     </script>
-    <script src="../jquery.js"></script>
-    <script src="../mustache.js"></script>
+    <script src="//caerphoto.com/jquery.js"></script>
+    <script src="//caerphoto.com/mustache.js"></script>
     <script src="minipetter.js"></script>
   </body>
 </html>
