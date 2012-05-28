@@ -19,6 +19,7 @@ $(function () {
 
         screen_size,
         last_scroll_pos,
+        ROOT_PATH = "/",
 
         ajax_defaults = {
             url: "api.php",
@@ -96,7 +97,7 @@ $(function () {
             data: { password: pw, action: "login" },
             success: function () {
                 $body.addClass("logged_in");
-                window.location.hash = current_pet.short_name || "_";
+                window.location.hash = current_pet.short_name || ROOT_PATH;
             },
             error: function () {
                 window.alert("Incorrect password.");
@@ -112,7 +113,7 @@ $(function () {
             data: { action: "logout" },
             success: function () {
                 $body.removeClass("logged_in");
-                window.location.hash = current_pet.short_name || "_";
+                window.location.hash = current_pet.short_name || ROOT_PATH;
             }
         });
     };
@@ -408,7 +409,7 @@ $(function () {
         var h = window.location.hash,
             route, action;
 
-        if (!h || h === "#_") {
+        if (!h || h === "#" + ROOT_PATH) {
             showList();
             hidePopup();
             hideEditor();
@@ -481,7 +482,7 @@ $(function () {
 
             case "save_update":
                 saveUpdate(function () {
-                    window.location.hash = "_";
+                    window.location.hash = ROOT_PATH;
                 });
                 break;
 
@@ -568,7 +569,7 @@ $(function () {
         if (evt.keyCode === 13 && (evt.ctrlKey || evt.metaKey)) {
             window.location.hash = current_pet.short_name + "/save";
         } else if (evt.keyCode === 27) {
-            window.location.hash = current_pet.short_name || "_";
+            window.location.hash = current_pet.short_name || ROOT_PATH;
         }
 
     });

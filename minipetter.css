@@ -129,22 +129,49 @@ input[type='search'] {
 }
 
 @-webkit-keyframes rotate {
-    from {
-        -webkit-transform:rotate(0deg);
-    }
+    from { -webkit-transform:rotate(0deg); }
+    to { -webkit-transform:rotate(360deg); }
+}
 
-    to {
-        -webkit-transform:rotate(360deg);
-    }
+@-moz-keyframes rotate {
+    from { -webkit-transform:rotate(0deg); }
+    to { -webkit-transform:rotate(360deg); }
+}
+
+@-ms-keyframes rotate {
+    from { -webkit-transform:rotate(0deg); }
+    to { -webkit-transform:rotate(360deg); }
+}
+
+@keyframes rotate {
+    from { -webkit-transform:rotate(0deg); }
+    to { -webkit-transform:rotate(360deg); }
 }
 
 .loading_spinner {
     display: inline-block;
     margin-right: 0.5em;
+
+    /* Hooray for prefix tediousness :( */
     -webkit-animation-name: rotate;
     -webkit-animation-duration: 1.5s;
     -webkit-animation-iteration-count: infinite;
     -webkit-animation-timing-function: linear;
+
+    -moz-animation-name: rotate;
+    -moz-animation-duration: 1.5s;
+    -moz-animation-iteration-count: infinite;
+    -moz-animation-timing-function: linear;
+
+    -ms-animation-name: rotate;
+    -ms-animation-duration: 1.5s;
+    -ms-animation-iteration-count: infinite;
+    -ms-animation-timing-function: linear;
+
+    animation-name: rotate;
+    animation-duration: 1.5s;
+    animation-iteration-count: infinite;
+    animation-timing-function: linear;
 }
 
 .clear_float {
@@ -277,7 +304,6 @@ body.logged_in a[href='#add'], body.logged_in a[href='#new_update'] {
     padding: 0 0.5em 0 0;
     position: relative;
     overflow: visible;
-    /*border-left: 4px solid #ccc;*/
 }
 
 .pet_link {
@@ -774,6 +800,7 @@ body.has_popup #updater.visible {
         font-size: 0.8em;
         min-height: 0;
         z-index: -1;
+        border: none;
     }
 
     #button_wrapper {
