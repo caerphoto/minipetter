@@ -615,6 +615,11 @@ body.logged_in .box_buttons {
     outline: none;
 }
 
+#list_hint {
+    color: #999;
+    font-style: italic;
+}
+
 #last_update_value {
     white-space: pre-line;
     max-width: 500px;
