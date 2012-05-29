@@ -67,7 +67,6 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'true') {
 
     <p>What's this all about? :: Click <a href="http://www.alternative-blog.net/2012/05/presenting-minipets-database-q.html">here</a> for Details!</p>
 
-
     <div id="list_controls" class="visible">
       <label for="list_filter" class="search"><input id="list_filter" type="search"
         placeholder="enter pet name"></label>
@@ -86,7 +85,12 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'true') {
     </div>
 
     <div id="main_wrapper">
-      <p id="list_hint">Select a pet from the list on the right &rarr;</p>
+      <noscript>
+        <p id="o_noes_js">O noes! It seems you don't have JavaScript enabled in your browser. This site can't function without it, unfortunately, so you'll need to re-enable it before you can see all the minipet info.</p>
+      </noscript>
+      <p id="list_hint" style="display: none">Select a pet from the list on the right &rarr;</p>
+      <script> document.getElementById("list_hint").style.display = ""; </script>
+
       <h2 id="last_update_date"><?php echo $last_update_date; ?></h2>
       <p id="last_update_value"><?php echo $last_update_value; ?></p>
 

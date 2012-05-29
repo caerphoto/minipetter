@@ -615,6 +615,13 @@ body.logged_in .box_buttons {
     outline: none;
 }
 
+#o_noes_js {
+    /*font-weight: bold;*/
+    font-size: 1.5em;
+    color: #800;
+    max-width: 600px;
+}
+
 #list_hint {
     color: #999;
     font-style: italic;
