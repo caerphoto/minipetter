@@ -322,13 +322,19 @@ body.logged_in a[href='#add'], body.logged_in a[href='#new_update'] {
 .alpha_marker .alpha {
     font-size: 1em;
     font-weight: bold;
-    color: #000;
+    color: #789;
     background-color: #f2f6ff;
     padding: 0.5em 2em;
     margin: 0.5em;
     margin-left: 0;
     position: relative;
     cursor: pointer;
+    border: 1px solid #def;
+}
+
+.alpha_marker .alpha:hover {
+    background-color: #def;
+    border-color: #ace;
 }
 
 .alpha_marker .alpha::after {
@@ -336,9 +342,10 @@ body.logged_in a[href='#add'], body.logged_in a[href='#new_update'] {
     display: block;
     position: absolute;
     right: 1em;
-    top: 1em;
+    top: 0.8em;
     color: #789;
     font-size: 0.8em;
+    font-family: "Helvetica Neue", Arial;
 }
 
 .alpha_marker .alpha.collapsed::after {
