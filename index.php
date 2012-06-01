@@ -1,11 +1,12 @@
 <?php
 session_start();
 include "updates.php";
+$APP_NAME = "Minipets Database";
 ?>
 <!DOCTYPE html>
 <html>
   <head>
-    <title>Minipetter</title>
+    <title><?php echo $APP_NAME ?></title>
     <link href='http://fonts.googleapis.com/css?family=Nobile:400,400italic,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="minipetter.css">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, user-scalable=no, maximum-scale=1.0">
@@ -93,6 +94,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'true') {
 
       <h2 id="last_update_date"><?php echo $last_update_date; ?></h2>
       <p id="last_update_value"><?php echo $last_update_value; ?></p>
+
+      <div id="pet_count"><span></span> pets</div>
 
       <ul id="pet_list" class="visible">
         <li class="loading"><div class="loading_spinner">&#9650;</div>Loading pet data&hellip;</li>
@@ -280,7 +283,8 @@ create
             fields: <?php echo json_encode($db_cols); ?>,
             types: <?php echo json_encode($types); ?>,
             sources: <?php echo json_encode($sources); ?>,
-            rarities: <?php echo json_encode($rarities); ?>
+            rarities: <?php echo json_encode($rarities); ?>,
+            app_name: "<?php echo $APP_NAME; ?>"
         };
     </script>
     <script src="//caerphoto.com/jquery.js"></script>

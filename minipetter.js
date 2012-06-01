@@ -20,6 +20,8 @@ $(function () {
         screen_size,
         last_scroll_pos,
         ROOT_PATH = "/",
+        APP_NAME = config.app_name,
+        NAME_SEP = " :: ",
 
         ajax_defaults = {
             url: "api.php",
@@ -171,6 +173,7 @@ $(function () {
         }
 
         $pet_list.html(Mustache.to_html(list_tmpl, { pet_data: filtered_list }));
+        $("#pet_count").children("span").text(filtered_list.length);
 
         if (!screen_size && window.location.hash) {
             l = window.location.hash.slice(1);
@@ -190,7 +193,7 @@ $(function () {
 
         //last_scroll_pos = $w.scrollTop();
 
-        document.title = current_pet.long_name + " \u00B7 Minipetter";
+        document.title = current_pet.long_name + NAME_SEP + APP_NAME;
 
         // Transform numerical rarity (etc.) into text equivalent.
         $.extend(view, current_pet);
@@ -324,10 +327,9 @@ $(function () {
         }
 
         if (is_new_pet) {
-            document.title = "Add pet \u00B7 Minipetter";
+            document.title = "Add pet" + NAME_SEP + APP_NAME;
         } else {
-            document.title = "Edit: " + current_pet.long_name +
-                " \u00B7 Minipetter";
+            document.title = "Edit: " + current_pet.long_name + NAME_SEP + APP_NAME;
         }
 
         if (is_new_pet) {
@@ -416,7 +418,7 @@ $(function () {
             hideUpdater();
 
             $pet_list.find(".target").removeClass("target");
-            document.title = "Minipetter";
+            document.title = APP_NAME;
             return;
         }
 
