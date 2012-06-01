@@ -146,10 +146,15 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'true') {
 ?>
     <script type="text/mustache" id="list_tmpl">
       {{#pet_data}}
-      <li id="pet_{{short_name}}">
-        <a href="#{{short_name}}" class="pet_link {{rarity_txt}}">{{long_name}}</a>
-        <a class="button delete" href="#{{short_name}}/delete" title="Delete pet">&times;</a>
-      </li>
+        <li class="alpha_marker"><h2 class="alpha">{{alpha}}</h2>
+        <ul>
+        {{#pets}}
+          <li class="pet" id="pet_{{short_name}}">
+            <a href="#{{short_name}}" class="pet_link {{rarity_txt}}">{{long_name}}</a>
+            <a class="button delete" href="#{{short_name}}/delete" title="Delete pet">&times;</a>
+          </li>
+        {{/pets}}
+        </ul></li>
       {{/pet_data}}
     </script>
 

@@ -275,13 +275,19 @@ body.logged_in a[href='#add'], body.logged_in a[href='#new_update'] {
 #pet_count {
     position: absolute;
     right: 0;
-    top: -2em;
+    top: -2.5em;
     width: 300px;
     text-align: center;
 }
 
 #pet_count::after {
     content: ":";
+}
+
+#pet_list, .alpha_marker ul {
+    list-style: none;
+    margin: 0;
+    padding: 0;
 }
 
 #pet_list {
@@ -295,10 +301,7 @@ body.logged_in a[href='#add'], body.logged_in a[href='#new_update'] {
     -moz-box-sizing: border-box;
     box-sizing: border-box;
 
-    list-style: none;
     width: 300px;
-    padding: 0;
-    margin: 0;
     z-index: 2;
 
     overflow: auto;
@@ -314,6 +317,40 @@ body.logged_in a[href='#add'], body.logged_in a[href='#new_update'] {
     padding: 0 0.5em 0 0;
     position: relative;
     overflow: visible;
+}
+
+.alpha_marker .alpha {
+    font-size: 1em;
+    font-weight: bold;
+    color: #000;
+    background-color: #f2f6ff;
+    padding: 0.5em 2em;
+    margin: 0.5em;
+    margin-left: 0;
+    position: relative;
+    cursor: pointer;
+}
+
+.alpha_marker .alpha::after {
+    content: "\25BC";
+    display: block;
+    position: absolute;
+    right: 1em;
+    top: 1em;
+    color: #789;
+    font-size: 0.8em;
+}
+
+.alpha_marker .alpha.collapsed::after {
+    content: "\25BA";
+}
+
+
+.alpha.collapsed + ul {
+    height: 0;
+    margin: 0;
+    padding: 0;
+    overflow: hidden;
 }
 
 .pet_link {
@@ -337,7 +374,7 @@ body.logged_in a[href='#add'], body.logged_in a[href='#new_update'] {
     border-color: #ace;
 }
 
-#pet_list li:hover a.pet_link {
+#pet_list li.pet:hover a.pet_link {
     background-color: #ddd;
     color: #000;
     border-color: #aaa;
@@ -766,6 +803,15 @@ body.has_popup #updater.visible {
 
     #pet_list li {
         padding: 0;
+    }
+
+    #pet_list .alpha {
+        margin-right: 0;
+        padding: 1em;
+    }
+
+    #pet_list .alpha::after {
+        top: 1.5em;
     }
 
     #pet_list a.pet_link {

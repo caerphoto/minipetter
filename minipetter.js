@@ -137,7 +137,8 @@ $(function () {
         // the filter if it's given.
         var i, l, idx = 0,
             p,
-            re;
+            re,
+            view = [];
 
         pet_lookup = {};
         filtered_list = [];
@@ -172,7 +173,23 @@ $(function () {
             p.rarity_txt = config.rarities[idx].txt.toLowerCase();
         }
 
-        $pet_list.html(Mustache.to_html(list_tmpl, { pet_data: filtered_list }));
+        p = "";
+        idx = -1;
+        for (i = 0, l = filtered_list.length; i < l; i += 1) {
+            re = filtered_list[i].long_name.charAt(0);
+            if (re === p) {
+                view[idx].pets.push(filtered_list[i]);
+            } else {
+                idx += 1;
+                p = re;
+                view[idx] = {
+                    pets: [filtered_list[i]],
+                    alpha: p
+                };
+            }
+        }
+
+        $pet_list.html(Mustache.to_html(list_tmpl, { pet_data: view }));
         $("#pet_count").children("span").text(filtered_list.length);
 
         if (!screen_size && window.location.hash) {
@@ -497,9 +514,9 @@ $(function () {
         }
     });
 
-    $body.bind("click", function (evt) {
-        $(evt.target).addClass("clicked");
-    });
+    //$body.bind("click", function (evt) {
+        //$(evt.target).addClass("clicked");
+    //});
 
     $list_filter.keyup(function () {
         buildLists(this.value);
@@ -583,6 +600,10 @@ $(function () {
     $.ajaxSetup(ajax_defaults);
 
     setupFilterOptions();
+    $pet_list.delegate(".alpha", "click", function () {
+        var $el = $(this);
+        $el.toggleClass("collapsed");
+    });
 
     // And findally, load pet data and get the ball rolling.
     fetchPetData(function (data) {
