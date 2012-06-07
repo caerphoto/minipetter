@@ -332,6 +332,10 @@ body.logged_in a[href='#add'], body.logged_in a[href='#new_update'] {
     border: 1px solid #def;
 }
 
+#pet_list li:first-child h2 {
+    margin-top: 0;
+}
+
 .alpha_marker .alpha:hover {
     background-color: #def;
     border-color: #ace;
