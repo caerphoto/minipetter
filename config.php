@@ -19,7 +19,9 @@ $db_cols = array(
     'y',
     'ob_via',     // integer (see $sources below)
     'loc',        // text (e.g. "Scarlet Monastery Graveyard")
-    'info'        // Text; misc additional info, including flavour text.
+    'info',       // text; misc additional info, including flavour text.
+    'tradeable',  // integer(1); whether the pet can be sold at the AH or not.
+    'can_battle'  // integer(1); whether the pet can battle or not
 );
 
 $types = array(

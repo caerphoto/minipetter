@@ -1,0 +1,184 @@
+<!-- Filter options -->
+<script type="text/mustache" id="filter_by_type_tmpl">
+  <option value="-1">Any</option>
+{{#options}}
+  <option value="{{idx}}">{{txt}}</option>
+{{/options}}
+</script>
+
+<script type="text/mustache" id="filter_by_rarity_tmpl">
+  <option value="-1">Any</option>
+{{#options}}
+  <option value="{{idx}}">{{txt}}</option>
+{{/options}}
+</script>
+
+<script type="text/mustache" id="filter_by_source_tmpl">
+  <option value="-1">Any</option>
+{{#options}}
+  <option value="{{idx}}">{{txt}}</option>
+{{/options}}
+</script>
+
+
+<!-- Pet list -->
+<script type="text/mustache" id="list_tmpl">
+  {{#pet_data}}
+    <li class="alpha_marker"><h2 class="alpha collapsed">{{alpha}}</h2>
+    <ul>
+    {{#pets}}
+      <li class="pet" id="pet_{{short_name}}">
+        <a href="#{{short_name}}" class="pet_link {{rarity_txt}}">{{long_name}}</a>
+        <a class="button delete" href="#{{short_name}}/delete" title="Delete pet">&times;</a>
+      </li>
+    {{/pets}}
+    </ul></li>
+  {{/pet_data}}
+</script>
+
+
+<!-- Pet info box -->
+<script type="text/mustache" id="popup_tmpl">
+  <div class="box_buttons">
+    <a class="button change" href="#{{short_name}}/edit" title="Shortcut: E">edit</a>
+  </div>
+
+  <h2 id="popup_name">{{long_name}}</h2>
+  <div class="box_left">
+    <img id="popup_img" class="box_img"
+    {{#img_src}}
+      src="{{img_src}}"
+    {{/img_src}}
+    {{^img_src}}
+      src="img.php?name={{short_name}}"
+    {{/img_src}}
+      width="200" height="200" alt="Picture of {{long_name}}">
+
+
+  {{#loc}}
+    <div class="box_coords">{{x}}, {{y}}</div>
+  {{/loc}}
+
+    <div class="box_loc">{{loc}}</div>
+  </div>
+
+  <div class="box_info">
+    <p class="details">
+      <label>Type:</label> <span>{{type}}</span><br>
+      <label>Rarity:</label> <span>{{rarity}}</span><br>
+      <label>Source:</label> <span>{{source}}</span><br>
+      <label>Tradeable:</label>
+      {{#tradeable}}
+        <span class="boolean yes">Yes</span>
+      {{/tradeable}}
+      {{^tradeable}}
+        <span class="boolean">No</span>
+      {{/tradeable}}<br>
+      <label>Can battle:</label>
+      {{#can_battle}}
+        <span class="boolean yes">Yes</span>
+      {{/can_battle}}
+      {{^can_battle}}
+        <span class="boolean">No</span>
+      {{/can_battle}}
+    </p>
+    <p class="info">{{{info}}}</p>
+  {{#flavour_text}}
+    <p class="flavour_text">{{flavour_text}}</p>
+  {{/flavour_text}}
+  </div>
+  <div id="button_wrapper">
+    <a class="button" id="close_popup" href="#/">back to pet list</a>
+  </div>
+</script>
+
+
+<!-- Pet info editor box -->
+<script type="text/mustache" id="editor_tmpl">
+  <div class="box_buttons">
+    <a class="button change" href="#{{#long_name}}
+{{short_name}}/save
+{{/long_name}}
+{{^long_name}}
+create
+{{/long_name}}"
+      title="Shortcut: Ctrl + Enter">save</a>
+
+    <a class="button" href="#{{#short_name}}
+{{short_name}}
+{{/short_name}}
+{{^short_name}}
+{{cancel_to}}
+{{/short_name}}"
+      title="Shortcut: Esc">cancel</a>
+  </div>
+
+  <form id="editor_form">
+    <div class="field">
+      <label for="long_name" accesskey="n">Name:</label>
+      <input id="long_name_input" name="long_name" value="{{long_name}}"
+      pattern="([A-Z][a-zA-Z\-.']* ?)+(\w|\d)">
+      <span id="derived_short_name">(short name: <span id="sn">{{short_name}}</span>)</span>
+    </div>
+
+    <div class="field">
+      <label for="img_src">Image URL:</label>
+      <input name="img_src" type="url" value="{{img_src}}">
+    </div>
+
+    <div class="field">
+      <label for="x">Coordinates:</label>
+      <input name="x" value="{{x}}">, <input name="y" value="{{y}}">
+    </div>
+
+    <div class="field">
+      <label for="loc">Location:</label>
+      <input name="loc" value="{{loc}}">
+    </div>
+
+    <div class="field column">
+      <label for="type">Type:</label>
+      <select name="type">
+      {{#types}}
+        <option value="{{val}}">{{txt}}</option>
+      {{/types}}
+      </select>
+    </div>
+
+    <div class="field column">
+      <label for="rarity">Rarity:</label>
+      <select name="rarity">
+      {{#rarities}}
+        <option value="{{val}}">{{txt}}</option>
+      {{/rarities}}
+      </select>
+    </div>
+
+    <div class="field column">
+      <label for="ob_via">Source:</label>
+      <select name="ob_via">
+      {{#sources}}
+        <option value="{{val}}">{{txt}}</option>
+      {{/sources}}
+      </select>
+    </div>
+
+    <div class="field column new_row"<
+      <label for="tradeable">Tradeable:</label>
+      <input name="tradeable" type="checkbox"
+      {{#tradeable}}checked{{/tradeable}}>
+    </div>
+
+    <div class="field column"<
+      <label for="can_battle">Can battle:</label>
+      <input name="can_battle" type="checkbox"
+      {{#can_battle}}checked{{/can_battle}}>
+    </div>
+
+
+    <label for="info">Info:</label>
+    <div class="textarea_wrapper">
+      <textarea name="info">{{info}}</textarea>
+    </div>
+  </form>
+</script>

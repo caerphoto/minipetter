@@ -221,6 +221,13 @@ $(function () {
         idx = parseInt(current_pet.type, 10) || 0;
         view.type = config.types[idx].txt;
 
+        if (current_pet.tradeable === "0") {
+            delete view.tradeable;
+        }
+        if (current_pet.can_battle === "0") {
+            delete view.can_battle;
+        }
+
         // Convert "This is some info.  @@this is flavour text." into
         // appropriate HTML.
         info_txt = current_pet.info.split("@@");
@@ -258,8 +265,12 @@ $(function () {
         }
 
         // Get values from form and store them in new_pet.
-        $.each(config.fields, function (idx, val) {
-            new_pet[val] = (f[val] || {}).value;
+        $.each(config.fields, function (idx, field) {
+            if (field === "tradeable" || field === "can_battle") {
+                new_pet[field] = (f[field] || {}).checked ? 1 : 0;
+            } else {
+                new_pet[field] = (f[field] || {}).value;
+            }
         });
 
         if (is_new_pet) {
@@ -354,6 +365,13 @@ $(function () {
             view.cancel_to = (current_pet || {}).short_name;
         } else {
             $.extend(view, current_pet);
+        }
+
+        if (current_pet.tradeable === "0") {
+            delete view.tradeable;
+        }
+        if (current_pet.can_battle === "0") {
+            delete view.can_battle;
         }
 
         $editor.html(Mustache.to_html(editor_tmpl, view));
@@ -513,10 +531,6 @@ $(function () {
                 showList(); // might still be hidden if on a phone
         }
     });
-
-    //$body.bind("click", function (evt) {
-        //$(evt.target).addClass("clicked");
-    //});
 
     $list_filter.keyup(function () {
         buildLists(this.value);

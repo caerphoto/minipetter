@@ -64,6 +64,8 @@ function bind_params(&$query, &$new_pet) {
         case "type":
         case "rarity":
         case "ob_via":
+        case "tradeable":
+        case "can_battle":
             // Work around a PDO bug whereby PDO::PARAM_INT is ignored if the
             // value being bound is not an integer. MySQL doesn't complain about
             // this, but Postgres does.
