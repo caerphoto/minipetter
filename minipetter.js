@@ -41,7 +41,7 @@ $(function () {
         buildLists, savePet, deletePet, saveUpdate,
 
         showPopup, hidePopup, showEditor, hideEditor, showList, hideList,
-        showUpdater, hideUpdater;
+        showUpdater, hideUpdater, ensureVisible;
 
     if (window.getComputedStyle) {
         screen_size = window.getComputedStyle(document.body,':after').getPropertyValue('content');
@@ -198,6 +198,28 @@ $(function () {
         }
     };
 
+    ensureVisible = function ($item) {
+        var t = $item.position().top,
+            b = t + $item.height(),
+            sp = $pet_list.scrollTop(),
+            h = $pet_list.height();
+
+        // Ensure given item is visible, i.e. both not collapsed, and scrolled
+        // into view.
+        $item.parent().prev().removeClass("collapsed");
+
+        if (t < 0) {
+            // item is scrolled out of view past the top of the list's box
+            $pet_list.scrollTop(sp + t);
+            return;
+        }
+
+        if (b > h) {
+            // item is scrolled off the bottom of the list's box
+            $pet_list.scrollTop(sp - (h - b));
+        }
+    };
+
     showPopup = function () {
         var $w = $(window),
             idx,
@@ -246,6 +268,9 @@ $(function () {
 
         $w = $("#pet_" + current_pet.short_name);
         $w.addClass("target");
+
+
+        ensureVisible($w);
 
         return true;
     };

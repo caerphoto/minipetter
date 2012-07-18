@@ -316,8 +316,11 @@ body.logged_in a[href='#add'], body.logged_in a[href='#new_update'] {
 #pet_list li {
     margin: 0;
     padding: 0 0.5em 0 0;
-    position: relative;
     overflow: visible;
+}
+
+#pet_list li.pet {
+    position: relative;
 }
 
 .alpha_marker .alpha {
