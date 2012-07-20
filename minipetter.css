@@ -371,7 +371,6 @@ body.logged_in a[href='#add'], body.logged_in a[href='#new_update'] {
 .pet_link {
     display: block;
 
-    /*border-top: 1px solid #ccc;*/
     padding: 0.5em 1em 0.5em 2em;
 
     border: 1px solid #ddd;
@@ -395,33 +394,37 @@ body.logged_in a[href='#add'], body.logged_in a[href='#new_update'] {
     border-color: #aaa;
 }
 
-.poor {
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1),
-        6px 0 0 -3px #ccc inset;
+/* Quality indicator. */
+a.pet_link:before {
+    display: block;
+    position: absolute;
+    content: "";
+    left: 1px;
+    top: 1px;
+    bottom: 1px;
+    width: 4px;
 }
-.common {
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1),
-        6px 0 0 -3px #666 inset;
+
+.poor:before {
+    background-color: #ccc;
 }
-.uncommon {
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1),
-        6px 0 0 -3px #1ecc00 inset;
+.common:before {
+    background-color: #666;
 }
-.rare {
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1),
-        6px 0 0 -3px #0070dd inset;
+.uncommon:before {
+    background-color: #1ecc00;
 }
-.epic {
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1),
-        6px 0 0 -3px #a335ee inset;
+.rare:before {
+    background-color: #0070dd;
 }
-.legendary {
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1),
-        6px 0 0 -3px #ff8000 inset;
+.epic:before {
+    background-color: #a335ee;
 }
-.heirloom {
-    box-shadow: 0 1px 3px rgba(0,0,0,0.1),
-        6px 0 0 -3px #e6cc80 inset;
+.legendary:before {
+    background-color: #ff8000;
+}
+.heirloom:before {
+    background-color: #e6cc80;
 }
 
 #pet_list .button.delete {
