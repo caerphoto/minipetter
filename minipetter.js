@@ -138,6 +138,7 @@ $(function () {
         var i, l, idx = 0,
             p,
             re,
+            collapsed = "collapsed",
             view = [];
 
         pet_lookup = {};
@@ -145,6 +146,9 @@ $(function () {
 
         if (filter && typeof filter === "string") {
             re = new RegExp(filter, "i");
+
+            // Show list uncollapsed if using a filter.
+            collapsed = "";
 
             for (i = 0, l = pet_data.length; i < l; i += 1) {
                 p = pet_data[i];
@@ -176,6 +180,7 @@ $(function () {
         p = "";
         idx = -1;
         for (i = 0, l = filtered_list.length; i < l; i += 1) {
+            // Split list into sections based on first letter.
             re = filtered_list[i].long_name.charAt(0);
             if (re === p) {
                 view[idx].pets.push(filtered_list[i]);
@@ -184,7 +189,8 @@ $(function () {
                 p = re;
                 view[idx] = {
                     pets: [filtered_list[i]],
-                    alpha: p
+                    alpha: p,
+                    collapsed: collapsed
                 };
             }
         }
