@@ -15,17 +15,20 @@
    id="svg2"
    version="1.1"
    inkscape:version="0.48.1 r9760"
-   sodipodi:docname="favicon.svg">
+   sodipodi:docname="favicon.svg"
+   inkscape:export-filename="/Users/andrewfarrell/code/minipetter/favicon.png"
+   inkscape:export-xdpi="90"
+   inkscape:export-ydpi="90">
   <defs
      id="defs4">
     <linearGradient
        id="linearGradient3920">
       <stop
-         style="stop-color:#ff0202;stop-opacity:1;"
+         style="stop-color:#646464;stop-opacity:1;"
          offset="0"
          id="stop3922" />
       <stop
-         style="stop-color:#bb0000;stop-opacity:1;"
+         style="stop-color:#000000;stop-opacity:1;"
          offset="1"
          id="stop3924" />
     </linearGradient>
@@ -174,7 +177,7 @@
        inkscape:connector-curvature="0"
        sodipodi:nodetypes="cssssc" />
     <path
-       style="fill:url(#radialGradient3950);fill-opacity:1;stroke:none"
+       style="fill:url(#radialGradient3950);fill-opacity:1;stroke:none;stroke-opacity:1;stroke-width:0.29999999999999999;stroke-miterlimit:4;stroke-dasharray:none"
        d="m 7.4067572,7.3654925 c 0,0 0.1841987,0.7163281 0.8391272,0.7572611 0.6549284,0.040933 1.7277231,-0.2824572 2.2308506,0.1432656 0.266064,0.2251317 0.0614,0.7367945 0.81866,1.0437923 0.757261,0.3069977 1.419123,0.1341553 1.882919,0.8391275 1.023326,1.555455 -0.102332,2.70158 -0.859593,3.622573 -0.923709,1.12343 -1.507146,1.219376 -2.8448457,1.248457 C 7.5909559,15.060902 8.0207527,14.160376 6.9155609,13.996643 5.8103691,13.832911 5.0326415,14.42644 4.0911818,13.628246 3.1497221,12.830052 2.393761,11.152315 3.1701886,10.681068 4.707579,9.7479609 4.7274329,8.5845934 5.1554406,8.5525504 6.9987791,8.4145483 7.4067572,7.3654925 7.4067572,7.3654925 z"
        id="path3910"
        inkscape:connector-curvature="0"
