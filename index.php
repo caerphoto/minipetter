@@ -74,9 +74,9 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'true') {
 
       <label for="filter_by_type">Type:
         <select id="filter_by_type"></select></label>
-      <label for="filter_by_type">Rarity:
+      <label for="filter_by_rarity">Rarity:
         <select id="filter_by_rarity"></select></label>
-      <label for="filter_by_type">Source:
+      <label for="filter_by_source">Source:
         <select id="filter_by_source"></select></label>
 
       <button id="reset_filters">reset</button>
