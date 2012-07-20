@@ -9,6 +9,7 @@ $APP_NAME = "Minipets Database";
     <title><?php echo $APP_NAME ?></title>
     <link href='http://fonts.googleapis.com/css?family=Nobile:400,400italic,700' rel='stylesheet' type='text/css'>
     <link rel="stylesheet" href="minipetter.css">
+    <link rel="shortcut icon" type="image/x-icon" href="favicon.ico">
     <meta name="viewport" content="width=device-width, minimum-scale=1.0, user-scalable=no, maximum-scale=1.0">
 <?php // This meta allows the user to place the page on their home screen and
       // launch it like a native app, in a separate, UI-less version of Safari
