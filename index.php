@@ -1,4 +1,5 @@
 <?php
+header('Content-Type: text/html; charset=UTF-8');
 session_start();
 include "updates.php";
 $APP_NAME = "Minipets Database";
@@ -65,9 +66,9 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'true') {
     <div id="authors">Minipets Database project by <a href="http://caerphoto.com/">Andy</a> and
     <a href="http://www.alternative-blog.net/">The Godmother</a>. Source <a href="https://github.com/caerphoto/minipetter">available</a> on GitHub.</div>
 
-    <h1 id="page_title">Minipetter</h1>
+    <h1 id="page_title">The Minipets Database</h1>
 
-    <p>What's this all about? :: Click <a href="http://www.alternative-blog.net/2012/05/presenting-minipets-database-q.html">here</a> for Details!</p>
+    <p>What's this all about? :: Click <a href="http://www.alternative-blog.net/2012/09/its-alive111111.html">here</a> for Details!</p>
 
     <div id="list_controls" class="visible">
       <label for="list_filter" class="search"><input id="list_filter" type="search"
@@ -79,6 +80,8 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'true') {
         <select id="filter_by_rarity"></select></label>
       <label for="filter_by_source">Source:
         <select id="filter_by_source"></select></label>
+
+      <span id="pet_count"><span></span> pets</span>
 
       <button id="reset_filters">reset</button>
 
@@ -96,7 +99,6 @@ if (isset($_SESSION['logged_in']) && $_SESSION['logged_in'] == 'true') {
       <h2 id="last_update_date"><?php echo $last_update_date; ?></h2>
       <p id="last_update_value"><?php echo $last_update_value; ?></p>
 
-      <div id="pet_count"><span></span> pets</div>
 
       <ul id="pet_list" class="visible">
         <li class="loading"><div class="loading_spinner">&#9650;</div>Loading pet data&hellip;</li>

@@ -4,7 +4,13 @@ $(function () {
 
     var $popup_box = $("#popup_box"),
         $list_controls = $("#list_controls"),
-        $list_filter = $("#list_filter"),
+        $filters = {
+            name: $("#list_filter"),
+            type: $("#filter_by_type"),
+            rarity: $("#filter_by_rarity"),
+            source: $("#filter_by_source")
+        },
+        $reset_filters = $("#reset_filters"),
         $pet_list = $("#pet_list"),
         $main_wrapper = $("#main_wrapper"),
         $updater = $("#updater"),
@@ -38,6 +44,7 @@ $(function () {
         deriveShortName,
         logIn, logOut,
         fetchPetData,
+        getFilters, matchesFilters,
         buildLists, savePet, deletePet, saveUpdate,
 
         showPopup, hidePopup, showEditor, hideEditor, showList, hideList,
@@ -132,28 +139,75 @@ $(function () {
         });
     };
 
-    buildLists = function (filter, options) {
+    getFilters = function () {
+        var result = { count: 0 };
+
+        if ($filters.name.val()) {
+            result.name = new RegExp($filters.name.val(), "i");
+            result.count += 1;
+        }
+
+        if ($filters.type.prop("selectedIndex") > 0) {
+            result.type = ($filters.type.prop("selectedIndex") - 1).toString();
+            result.count += 1;
+        }
+
+        if ($filters.rarity.prop("selectedIndex") > 0) {
+            result.rarity = ($filters.rarity.prop("selectedIndex") - 1).toString();
+            result.count += 1;
+        }
+
+        if ($filters.source.prop("selectedIndex") > 0) {
+            result.source = ($filters.source.prop("selectedIndex") - 1).toString();
+            result.count += 1;
+        }
+
+        return result;
+    };
+
+    matchesFilters = function (pet, filters) {
+        var is_match = true;
+
+        if (filters.name && !filters.name.test(pet.long_name)) {
+            is_match = false;
+        }
+
+        if (filters.type && filters.type !== pet.type) {
+            is_match = false;
+        }
+
+        if (filters.rarity && filters.rarity !== pet.rarity) {
+            is_match = false;
+        }
+
+        if (filters.source && filters.source !== pet.ob_via) {
+            is_match = false;
+        }
+
+        return is_match;
+    };
+
+    buildLists = function (options) {
         // (Re)construct HTML list and internal lookup table of pet data, using
         // the filter if it's given.
         var i, l, idx = 0,
             p,
             re,
             collapsed = "collapsed",
-            view = [];
+            view = [],
+            filters = getFilters();
 
         pet_lookup = {};
         filtered_list = [];
 
-        if (filter && typeof filter === "string") {
-            re = new RegExp(filter, "i");
-
+        if (filters.count > 0) {
             // Show list uncollapsed if using a filter.
             collapsed = "";
 
             for (i = 0, l = pet_data.length; i < l; i += 1) {
                 p = pet_data[i];
 
-                if (re.test(p.long_name)) {
+                if (matchesFilters(p, filters)) {
                     p.index = i;
                     p.filtered_index = idx;
                     pet_lookup[p.short_name] = p;
@@ -171,6 +225,7 @@ $(function () {
             }
         }
 
+        // Set rarity text value for each item, for use in templates.
         for (i = 0, l = filtered_list.length; i < l; i += 1) {
             p = filtered_list[i];
             idx = +p.rarity;
@@ -200,8 +255,12 @@ $(function () {
 
         if (!screen_size && window.location.hash) {
             l = window.location.hash.slice(1);
-            $pet_list.find("#pet_" + l).addClass("target");
+            p = $("#pet_" + l);
+            p.addClass("target");
+            ensureVisible(p);
         }
+
+
     };
 
     ensureVisible = function ($item) {
@@ -275,7 +334,6 @@ $(function () {
         $w = $("#pet_" + current_pet.short_name);
         $w.addClass("target");
 
-
         ensureVisible($w);
 
         return true;
@@ -328,7 +386,7 @@ $(function () {
                     $.extend(current_pet, saved_pet_data);
                 }
 
-                buildLists($list_filter.val());
+                buildLists();
 
                 if (typeof callback === "function") {
                     callback(saved_pet_data);
@@ -563,11 +621,24 @@ $(function () {
         }
     });
 
-    $list_filter.keyup(function () {
-        buildLists(this.value);
+    $filters.name.keyup(function () {
+        buildLists();
     }).click(function () {
         // handle menu-based input, and clicks on the 'clear text' button
-        buildLists(this.value);
+        buildLists();
+    });
+
+    $list_controls.delegate("select", "change", function () {
+        buildLists();
+    });
+
+    $reset_filters.click(function () {
+        var f = $filters;
+        f.name.val("");
+        f.type.prop("selectedIndex", 0);
+        f.rarity.prop("selectedIndex", 0);
+        f.source.prop("selectedIndex", 0);
+        buildLists();
     });
 
     $body.delegate("textarea", "focus", function () {

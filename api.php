@@ -8,6 +8,11 @@ function get_all_minipets() {
     // gzip output, since it's quite big.
     ob_start("ob_gzhandler");
 
+    // Unset "Pragma: no-cache" header, which often gets set somewhere up the
+    // chain by the host's Apache config.
+    header_remove("Pragma");
+    header_remove("Cache-Control");
+
     $dbh = new PDO($db_conn, $username, $pw);
     $query = $dbh->prepare("select " .
         join(",", $db_cols) .
@@ -262,7 +267,7 @@ $req_method = isset($_SERVER['REQUEST_METHOD']) ? $_SERVER['REQUEST_METHOD'] : n
 $action = isset($_REQUEST['action']) ? $_REQUEST['action'] : null;
 
 session_start();
-header('Content-Type: application/json');
+header('Content-Type: application/json; charset=UTF-8');
 
 if ($req_method == "POST") {
     if ($action === "add_update") {

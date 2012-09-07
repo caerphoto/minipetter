@@ -26,7 +26,7 @@ h2 {
 #page_title {
     width: 586px;
     height: 250px;
-    margin: 1em auto 0 auto;
+    margin: 25px auto 0 auto;
     background-image: url('logo.png');
     background-size: contain;
     text-indent: -999em;
@@ -45,6 +45,8 @@ h2 {
 
 #page_title + p {
     text-align: center;
+    height: 1.5em;
+    margin-bottom: 1em;
 }
 
 #authors {
@@ -126,9 +128,10 @@ button:active, a.button:active {
 }
 
 input[type='search'] {
-    width: 12em;
+    width: 9em;
 }
 
+/* "Loading" spinner animation definition. */
 @-webkit-keyframes rotate {
     from { -webkit-transform:rotate(0deg); }
     to { -webkit-transform:rotate(360deg); }
@@ -208,7 +211,6 @@ body.logged_in a[href='#log_out'] {
     visibility: hidden;
     overflow: visible;
     position: relative;
-    padding-top: 1em;
 }
 
 #list_controls.visible {
@@ -221,7 +223,7 @@ body.logged_in a[href='#log_out'] {
 }
 
 label.search::before {
-    content: "Search pets: ";
+    content: "Search: ";
 }
 
 #reset_filters {
@@ -274,11 +276,7 @@ body.logged_in a[href='#add'], body.logged_in a[href='#new_update'] {
 }
 
 #pet_count {
-    position: absolute;
-    right: 0;
-    top: -2.5em;
-    width: 300px;
-    text-align: center;
+    display: inline-block;
 }
 
 #pet_count::after {
@@ -708,7 +706,7 @@ body.logged_in .box_buttons {
 }
 
 #last_update_value {
-    white-space: pre-line;
+    white-sdivpace: pre-line;
     max-width: 500px;
 }
 
@@ -990,15 +988,4 @@ body.has_popup #updater.visible {
         -moz-transition: top 0.3s ease-out;
         transition: top 0.3s ease-out;
     }
-}
-
-/* TEMPORARY: hidden until they actually do anything */
-#list_controls label, #list_controls button {
-    opacity: 0.2;
-    display: none;
-}
-
-label[for='list_filter'] {
-    opacity: 1.0 !important;
-    display: inline-block !important;
 }
