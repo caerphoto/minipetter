@@ -172,15 +172,18 @@ $(function () {
             is_match = false;
         }
 
-        if (filters.type && filters.type !== pet.type) {
+        // Yes, != and == are generally bad, but here it's the simplest
+        // solution, because different databases return the values in different
+        // formats: MySQL returns strings, Postgres returns numbers.
+        if (filters.type && filters.type != pet.type) {
             is_match = false;
         }
 
-        if (filters.rarity && filters.rarity !== pet.rarity) {
+        if (filters.rarity && filters.rarity != pet.rarity) {
             is_match = false;
         }
 
-        if (filters.source && filters.source !== pet.ob_via) {
+        if (filters.source && filters.source != pet.ob_via) {
             is_match = false;
         }
 
@@ -264,6 +267,10 @@ $(function () {
     };
 
     ensureVisible = function ($item) {
+        if (!$item || $item.length === 0) {
+            return;
+        }
+
         var t = $item.position().top,
             b = t + $item.height(),
             sp = $pet_list.scrollTop(),
